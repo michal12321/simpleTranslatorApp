@@ -1,8 +1,12 @@
-import React from 'react';
-import {Text} from 'react-native';
+import React, {useState} from 'react';
+import {TextInput, View, StyleSheet} from 'react-native';
+
+import TextBox from './common/TextBox';
 
 const Translator = () => {
-  return <Text>TRANSLATOR</Text>;
+  const [text, setText] = useState();
+
+  return <TextBox />;
 };
 
 export default Translator;
