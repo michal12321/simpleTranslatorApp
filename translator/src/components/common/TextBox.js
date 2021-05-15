@@ -10,13 +10,15 @@ const TextBox = () => {
       onChangeText={setText}
       value={text}
       placeholder="translate..."
+      multiline={true}
     />
   );
 };
 
 const styles = StyleSheet.create({
   input: {
-    height: 40,
+    textAlignVertical: 'top',
+    height: 100,
     margin: 12,
     borderWidth: 1,
   },

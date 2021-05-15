@@ -2,16 +2,14 @@ import React from 'react';
 import type {Node} from 'react';
 import {SafeAreaView, ScrollView, Text, View} from 'react-native';
 
-import Translator from './components/Translator';
+import Translator from './src/components/Translator';
 
 const App: () => Node = () => {
   return (
     <SafeAreaView>
-      <ScrollView>
-        <View>
-          <Translator />
-        </View>
-      </ScrollView>
+      <View>
+        <Translator />
+      </View>
     </SafeAreaView>
   );
 };
