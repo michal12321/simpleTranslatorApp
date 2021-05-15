@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {TextInput, StyleSheet} from 'react-native';
 
-const TextBox = () => {
+const TextBox = ({placeholder}) => {
   const [text, setText] = useState();
 
   return (
@@ -9,7 +9,7 @@ const TextBox = () => {
       style={styles.input}
       onChangeText={setText}
       value={text}
-      placeholder="translate..."
+      placeholder={placeholder}
       multiline={true}
     />
   );
