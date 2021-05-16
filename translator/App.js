@@ -1,6 +1,6 @@
 import React from 'react';
 import type {Node} from 'react';
-import {SafeAreaView, ScrollView, Text, View} from 'react-native';
+import {SafeAreaView, View} from 'react-native';
 
 import Translator from './src/components/Translator';
 

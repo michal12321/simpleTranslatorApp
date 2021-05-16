@@ -31,7 +31,8 @@ const Translator = () => {
         .catch(err => console.log(err));
     };
 
-    getTranslation();
+    clearTimeout(translationTimeout);
+    const translationTimeout = setTimeout(() => getTranslation(), 500);
   }, [text, targetLanguage, baseLanguage]);
 
   return (
