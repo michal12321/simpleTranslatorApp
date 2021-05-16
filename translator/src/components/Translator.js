@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
 import {Image, View, StyleSheet, Text} from 'react-native';
 import axios from 'axios';
+import Config from 'react-native-config';
 
 import {baseLanguages, targetLanguages} from '../assets/languages';
 import Header from './common/Header';
 import LangPicker from './common/Picker';
 import TextBox from './common/TextBox';
 
-const API_KEY = 'AIzaSyCpSTgDiocRg7X5EBALWXNV8vDjJ2ExSlw';
 const CONFIG = {
   HEADER_TITLE: 'SIMPLE TRANSLATOR APP',
   PICKER_DESCRIPTION: 'Select languages:',
@@ -25,13 +25,13 @@ const Translator = () => {
   const translate = () => {
     axios
       .post(
-        'https://translation.googleapis.com/language/translate/v2',
+        `${Config.API_URL}/language/translate/v2`,
         {},
         {
           params: {
             q: text,
             target: targetLanguage,
-            key: API_KEY,
+            key: Config.API_KEY,
             format: 'text',
             source: baseLanguage,
           },
