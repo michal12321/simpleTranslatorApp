@@ -2,11 +2,10 @@ import React, {useState} from 'react';
 import {Image, View, StyleSheet, Text} from 'react-native';
 import axios from 'axios';
 
-import TextBox from './common/TextBox';
+import {baseLanguages, targetLanguages} from '../assets/languages';
 import Header from './common/Header';
-import {Colors} from '../styles';
-import {languages} from '../assets/languages';
 import LangPicker from './common/Picker';
+import TextBox from './common/TextBox';
 
 const API_KEY = 'AIzaSyCpSTgDiocRg7X5EBALWXNV8vDjJ2ExSlw';
 const CONFIG = {
@@ -31,15 +30,17 @@ const Translator = () => {
         {
           params: {
             q: text,
-            target: baseLanguage,
+            target: targetLanguage,
             key: API_KEY,
             format: 'text',
+            source: baseLanguage,
           },
         },
       )
-      .then(res =>
-        setTranslatedText(res.data.data.translations[0].translatedText),
-      )
+      .then(res => {
+        console.log(res.data.data.translations[0].translatedText);
+        setTranslatedText(res.data.data.translations[0].translatedText);
+      })
       .catch(err => console.log(err));
   };
 
@@ -50,14 +51,14 @@ const Translator = () => {
       <View style={styles.pickerContainer}>
         <LangPicker
           style={styles.picker}
-          pickerItems={languages}
+          pickerItems={baseLanguages}
           selectedLanguage={baseLanguage}
           setSelectedLanguage={setBaseLanguage}
         />
         <Image style={styles.icon} source={CONFIG.ARROW_PATH} />
         <LangPicker
           style={styles.picker}
-          pickerItems={languages}
+          pickerItems={targetLanguages}
           selectedLanguage={targetLanguage}
           setSelectedLanguage={setTargetLanguage}
         />
@@ -101,6 +102,7 @@ const styles = StyleSheet.create({
   translatedText: {
     marginLeft: 20,
     paddingVertical: 10,
+    height: 400,
   },
 });
 

@@ -1,9 +1,27 @@
-export const languages = [
+export const baseLanguages = [
   {
-    id: 0,
-    name: 'Croatian',
-    isoCode: 'hr',
+    id: 1,
+    name: 'Auto',
+    isoCode: null,
   },
+  {
+    id: 2,
+    name: 'English',
+    isoCode: 'en',
+  },
+  {
+    id: 3,
+    name: 'German',
+    isoCode: 'de',
+  },
+  {
+    id: 5,
+    name: 'Polish',
+    isoCode: 'pl',
+  },
+];
+
+export const targetLanguages = [
   {
     id: 1,
     name: 'Czech',
