@@ -1,16 +1,15 @@
 import React, {useState} from 'react';
 import {TextInput, StyleSheet} from 'react-native';
 
-const TextBox = ({placeholder}) => {
-  const [text, setText] = useState();
-
+const TextBox = ({placeholder, textValue, onChangeText, onSubmit}) => {
   return (
     <TextInput
       style={styles.input}
-      onChangeText={setText}
-      value={text}
+      onChangeText={onChangeText}
+      value={textValue}
       placeholder={placeholder}
       multiline={true}
+      onSubmitEditing={onSubmit}
     />
   );
 };
