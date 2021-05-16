@@ -1,12 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Image, View, StyleSheet, Text} from 'react-native';
-import axios from 'axios';
-import Config from 'react-native-config';
 
 import {baseLanguages, targetLanguages} from '../assets/languages';
 import Header from './common/Header';
 import LangPicker from './common/Picker';
 import TextBox from './common/TextBox';
+import translate from '../api/server/translate';
 
 const CONFIG = {
   HEADER_TITLE: 'SIMPLE TRANSLATOR APP',
@@ -22,27 +21,18 @@ const Translator = () => {
   const [baseLanguage, setBaseLanguage] = useState();
   const [targetLanguage, setTargetLanguage] = useState();
 
-  const translate = () => {
-    axios
-      .post(
-        `${Config.API_URL}/language/translate/v2`,
-        {},
-        {
-          params: {
-            q: text,
-            target: targetLanguage,
-            key: Config.API_KEY,
-            format: 'text',
-            source: baseLanguage,
-          },
-        },
-      )
-      .then(res => {
-        console.log(res.data.data.translations[0].translatedText);
-        setTranslatedText(res.data.data.translations[0].translatedText);
-      })
-      .catch(err => console.log(err));
-  };
+  useEffect(() => {
+    const getTranslation = () => {
+      translate
+        .getTranslation(text, targetLanguage, baseLanguage)
+        .then(res => {
+          setTranslatedText(res.data.data.translations[0].translatedText);
+        })
+        .catch(err => console.log(err));
+    };
+
+    getTranslation();
+  }, [text, targetLanguage, baseLanguage]);
 
   return (
     <View style={styles.container}>
@@ -67,7 +57,6 @@ const Translator = () => {
         placeholder={CONFIG.INPUT_PLACEHOLDER}
         textValue={text}
         onChangeText={setText}
-        onSubmit={translate}
       />
       <Text style={styles.pickerDescription}>{CONFIG.OUTPUT_DESCRIPTION}</Text>
       <Text style={styles.translatedText}>{translatedText}</Text>
